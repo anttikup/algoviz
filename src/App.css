@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+    text-align: center;
+    height: 100vh;
 }
 
 .App-logo {
@@ -28,11 +29,59 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.main {
+    border: solid gray 1px;
+    min-height: 50vh;
+    display: flex;
+    gap: 1em;
+    padding: 0.5em;
+}
+
+.main > * {
+    border-radius: 5px;
+}
+
+.editor {
+    min-width: 50%;
+    min-height: 20vh;
+}
+
+.item {
+    border: solid gray 1px;
+    background-color: #fffd;
+}
+
+.stack {
+    border: solid gray 1px;
+    min-width: 10em;
+    display: flex;
+    flex-direction: column-reverse;
+    min-height: 100%;
+    gap: 0.2em;
+    padding: 0.2em;
+}
+
+
+.queue {
+    border: solid gray 1px;
+    min-width: 10em;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    justify-content: center;
+    transition: gap 1s;
+    gap: 0.2em;
+    padding: 0.2em;
+}
+
+
+.array {
+    border: solid gray 1px;
+    min-width: 10em;
+}
+
+.array-index {
+    font-size: smaller;
+    color: #777;
+    width: max-content;
 }
