@@ -1,5 +1,6 @@
 import React from 'react';
 
+// eslint-disable-next-line no-multi-str
 const initialText = "\
 vars.sum = 0;\n\
 const q = new Queue({ name: 'q', color: 'pink' }); \n\

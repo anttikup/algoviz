@@ -31,7 +31,7 @@ export function makeGlobalsClass(events) {
 
             return new Proxy(this, {
                 get(target, prop) {
-                    if ( String(prop) == prop && !(prop in target) ) {
+                    if ( String(prop) === prop && !(prop in target) ) {
                         const val = self.items[prop]
                         /* events.push({
                          *     event: 'getprop',
@@ -45,7 +45,7 @@ export function makeGlobalsClass(events) {
                     return target[prop];
                 },
                 set(target, prop, val) {
-                    if ( String(prop) == prop ) {
+                    if ( String(prop) === prop ) {
                         self.items[prop] = val;
                         events.push({
                             event: 'setprop',

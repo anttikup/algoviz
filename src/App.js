@@ -1,6 +1,5 @@
 import { useState, useRef, useReducer } from 'react';
 
-import FloatingElem from './components/Floating';
 import StackElem, { makeStackClass } from './components/Stack';
 import QueueElem, { makeQueueClass } from './components/Queue';
 import ArrayElem, { makeArrayClass } from './components/Array';
@@ -22,6 +21,8 @@ function Component({ data }) {
             return (<ObjectElem name={data.name} items={data.items} color={data.color} />);
         case 'globals':
             return (<GlobalsElem name={data.name} items={data.items} color={data.color} />);
+        default:
+            new Error(`Unknown type: ${data.type}`);
     }
 
     return null;
@@ -58,7 +59,6 @@ const reducer = (state, action) => {
                         ]
                     }
                 }
-                break;
             case 'pop': {
                 const items = state[action.componentId].items;
                 return {
@@ -68,7 +68,6 @@ const reducer = (state, action) => {
                         items: state[action.componentId].items.slice(0, items.length - 1)
                     }
                 }
-                break;
             }
             case 'enqueue':
                 return {
@@ -81,7 +80,6 @@ const reducer = (state, action) => {
                         ]
                     }
                 }
-                break;
             case 'dequeue':
                 return {
                     ...state,
@@ -145,13 +143,20 @@ function App() {
 
         const code = editorRef.current.value;
         const curEvents = [];
+        // eslint-disable-next-line no-unused-vars
         const Stack = makeStackClass(curEvents);
+        // eslint-disable-next-line no-unused-vars
         const Queue = makeQueueClass(curEvents);
+        // eslint-disable-next-line no-unused-vars
         const Array = makeArrayClass(curEvents);
+        // eslint-disable-next-line no-unused-vars
         const Object = makeObjectClass(curEvents);
+        // eslint-disable-next-line no-unused-vars
         const Globals = makeGlobalsClass(curEvents);
+        // eslint-disable-next-line no-unused-vars
         const vars = new Globals({ color: 'chartreuse', name: 'vars' });
 
+        // eslint-disable-next-line no-eval
         eval(code);
 
         dispatch({ event: 'clear' });

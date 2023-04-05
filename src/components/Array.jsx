@@ -34,13 +34,13 @@ export function makeArrayClass(events) {
 
             return new Proxy(this, {
                 get(target, prop) {
-                    if ( Number(prop) == prop && !(prop in target) ) {
+                    if ( Number(prop) === prop && !(prop in target) ) {
                         return self.items[prop]
                     }
                     return target[prop];
                 },
                 set(target, prop, val) {
-                    if ( Number(prop) == prop ) {
+                    if ( Number(prop) === prop ) {
                         self.items[prop] = val;
                         events.push({
                             event: 'setitem',
