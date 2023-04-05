@@ -8,17 +8,33 @@ export function makeQueueClass(events) {
             this.id = makeId();
             this.items = [];
             console.info("Created queue,", this.id);
-            events.push({ event: 'create', type: 'queue', componentId: this.id, color: options?.color });
+            events.push({
+                event: 'create',
+                type: 'queue',
+                componentId: this.id,
+                color: options?.color,
+                name: options?.name
+            });
         }
 
         enqueue(val) {
             this.items.push(val);
-            events.push({ event: 'enqueue', componentId: this.id, value: val, id: makeId() });
+            events.push({
+                event: 'enqueue',
+                componentId: this.id,
+                value: val,
+                id: makeId()
+            });
         }
 
         dequeue() {
             const val = this.items.shift();
-            events.push({ event: 'dequeue', componentId: this.id, value: val, id: makeId() });
+            events.push({
+                event: 'dequeue',
+                componentId: this.id,
+                value: val,
+                id: makeId()
+            });
             return val;
         }
 
@@ -37,16 +53,20 @@ export function makeQueueClass(events) {
     };
 }
 
-export default function Queue({ items, color }) {
+export default function Queue({ name, items, color }) {
     return (
         <div className="queue" style={{backgroundColor: color }}>
-            {
-                items.map(item => (
-                    <div key={item.id} className="item queue-item">
-                        {item}
-                    </div>
-                ))
-            }
+            <h2>{ name }</h2>
+            <div>
+
+                {
+                    items.map(item => (
+                        <div key={item.id} className="item queue-item">
+                            {item}
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 };

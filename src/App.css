@@ -1,45 +1,37 @@
+* {
+    box-sizing: content-box;
+}
+
 .App {
     text-align: center;
     height: 100vh;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
+    display: grid;
+    grid-template-rows: auto 1fr 1fr;
 }
 
 .main {
     border: solid gray 1px;
-    min-height: 50vh;
+    padding: 0.5em;
+    height: 100%;
+
+}
+
+.blocks-section {
+    height: 90%;
+}
+
+.blocks {
     display: flex;
     gap: 1em;
     padding: 0.5em;
+    height: 100%;
 }
 
-.main > * {
+.blocks > * {
     border-radius: 5px;
 }
+
+
 
 .editor {
     min-width: 50%;
@@ -55,10 +47,17 @@
     border: solid gray 1px;
     min-width: 10em;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     min-height: 100%;
-    gap: 0.2em;
     padding: 0.2em;
+    background-color: #eee;
+}
+
+.stack > div {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    gap: 0.2em;
 }
 
 
@@ -68,20 +67,69 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
+    padding: 0.2em;
+    background-color: #eee;
+}
+
+.queue > div {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    transition: gap 1s;
+    height: 100%;
     gap: 0.2em;
+}
+
+.globals {
+    border: solid gray 1px;
+    min-width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5em;
+    background-color: #eee;
+    gap: 0.5em;
+}
+
+.globals > span {
+    height: min-content;
     padding: 0.2em;
 }
 
 
-.array {
+.array, .object {
     border: solid gray 1px;
     min-width: 10em;
+    background-color: #eee;
 }
 
-.array-index {
+.array > table, .object > table {
+    height: max-content;
+    width: 100%;
+}
+
+.array-index, .object-index {
     font-size: smaller;
     color: #777;
     width: max-content;
+    text-align: left;
+}
+
+.array-index td, .object-index td {
+    height: min-content;
+}
+
+h2 {
+    margin: 0.2em;
+    font-size: smaller;
+    border-bottom: 1px solid #fff3;
+    color: #333;
+}
+
+
+.floating {
+    position: absolute;
+    left: 30em;
+    top: 5em;
+    border: solid gray 1px;
+    background-color: #fffd;
+    padding: 1em;
 }
