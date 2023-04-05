@@ -23,7 +23,6 @@ export function makeQueueClass(events) {
                 event: 'enqueue',
                 componentId: this.id,
                 value: val,
-                id: makeId()
             });
         }
 
@@ -33,7 +32,6 @@ export function makeQueueClass(events) {
                 event: 'dequeue',
                 componentId: this.id,
                 value: val,
-                id: makeId()
             });
             return val;
         }
@@ -58,10 +56,9 @@ export default function Queue({ name, items, color }) {
         <div className="queue" style={{backgroundColor: color }}>
             <h2>{ name }</h2>
             <div>
-
                 {
-                    items.map(item => (
-                        <div key={item.id} className="item queue-item">
+                    items.map((item, index) => (
+                        <div key={`${index}-${item}`} className="item queue-item">
                             {item}
                         </div>
                     ))

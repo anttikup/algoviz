@@ -22,8 +22,7 @@ export function makeStackClass(events) {
             events.push({
                 event: 'push',
                 componentId: this.id,
-                value: val,
-                id: makeId()
+                value: val
             });
         }
 
@@ -32,8 +31,7 @@ export function makeStackClass(events) {
             events.push({
                 event: 'pop',
                 componentId: this.id,
-                value: val,
-                id: makeId()
+                value: val
             });
             return val;
         }
@@ -49,18 +47,17 @@ export function makeStackClass(events) {
 }
 
 export default function Stack({ name, items, color }) {
-    console.log("items:", items);
     return (
         <div className="stack" style={{ backgroundColor: color }}>
             <h2>{ name }</h2>
             <div>
-            {
-                items.map(item => (
-                    <div key={item.id} className="item stack-item">
-                        {item}
-                    </div>
-                ))
-            }
+                {
+                    items.map((item, index) => (
+                        <div key={`${index}-${item}`} className="item stack-item">
+                            {item}
+                        </div>
+                    ))
+                }
             </div>
         </div>
     );

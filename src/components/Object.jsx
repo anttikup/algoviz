@@ -68,7 +68,6 @@ export default function ObjectComponent({ name, items, color }) {
     const keys = Object.keys(items);
     keys.sort();
 
-    console.log("items:", items);
     for ( let i = 0; i < keys.length; i++ ) {
         const key = keys[i];
         sortedItems[i] = { key, value: items[key] ?? " " };

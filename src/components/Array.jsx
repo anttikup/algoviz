@@ -19,7 +19,7 @@ export function makeArrayClass(events) {
                 type: 'array',
                 componentId: this.id,
                 size,
-                items,
+                items: [ ...items ],
                 color: options?.color,
                 name: options?.name
             });
@@ -36,7 +36,7 @@ export function makeArrayClass(events) {
                 },
                 set(target, prop, val) {
                     if ( isNumber(prop) || isNumericString(prop) ) {
-                        target.items[prop] = val;
+                        target.items[Number(prop)] = val;
                         events.push({
                             event: 'setitem',
                             componentId: target.id,
@@ -44,6 +44,7 @@ export function makeArrayClass(events) {
                             value: val,
                             id: Number(prop)
                         });
+
                         return true;
                     }
 

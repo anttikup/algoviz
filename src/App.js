@@ -9,7 +9,6 @@ import Editor from './components/Editor';
 import './App.css';
 
 function Component({ data }) {
-    console.info("Render:", data);
     switch ( data.type ) {
         case 'stack':
             return (<StackElem name={data.name} items={data.items} color={data.color} />);
@@ -29,25 +28,24 @@ function Component({ data }) {
 }
 
 const reducer = (state, action) => {
-    console.log("Event:", action.event, "\n state:", JSON.stringify(state));
-
     if ( action ) {
         switch ( action.event ) {
             case 'clear':
                 console.log("newstate:", {});
                 return {};
 
-            case 'create':
+            case 'create': {
                 return {
                     ...state,
                     [action.componentId]: {
                         type: action.type,
-                        items: action.items ?? [],
+                        items: action.items ?? [], // Items is cloned when action is created.
                         color: action.color,
                         size: action.size,
                         name: action.name
                     }
                 }
+            }
             case 'push':
                 return {
                     ...state,
@@ -89,11 +87,19 @@ const reducer = (state, action) => {
                     }
                 }
 
-            case 'getitem':
-            case 'getprop':
-                return { ...state };
+            case 'getitem': {
+                return {
+                    ...state,
+                };
+            }
 
-            case 'setitem':
+            case 'getprop': {
+                return {
+                    ...state,
+                }
+            }
+
+            case 'setitem': {
                 const items = state[action.componentId].items;
                 return {
                     ...state,
@@ -106,10 +112,9 @@ const reducer = (state, action) => {
                         )
                     }
                 };
-
+            }
             case 'setprop': {
                 const obj = state[action.componentId].items;
-                console.log("set prop:", action.prop);
                 return {
                     ...state,
                     [action.componentId]: {
@@ -169,9 +174,7 @@ function App() {
         if ( pos >= events.length ) {
             throw new Error("No more events");
         }
-        console.info("Step", pos);
         const event = events[pos];
-        console.log("Cur:", event);
         dispatch(event);
         setPos(pos + 1);
     };
@@ -179,7 +182,6 @@ function App() {
     const keys = Object.keys(state);
     const globals = keys.filter(key => state[key].type === 'globals');
     const others = keys.filter(key => state[key].type !== 'globals');
-    console.log("  ", globals, others);
     return (
             <div className="App">
                 <header>Hello</header>
