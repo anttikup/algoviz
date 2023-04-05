@@ -1,5 +1,6 @@
 {
-  "name": "algovisu",
+    "name": "algovisu",
+    "homepage": "https://anttikup.github.io/algoviz/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
