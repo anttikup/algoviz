@@ -5,7 +5,6 @@ export function makeStackClass(events) {
         id;
         items;
         constructor(options) {
-            console.log("options:", options);
             this.id = makeId();
             this.items = [];
             console.info("Created stack,", this.id);

@@ -1,8 +1,6 @@
 import { makeId } from '../id';
+import { isNumericString, isNumber, readParams } from './util';
 
-function isArray(obj) {
-    return typeof obj === "object" && obj.length !== undefined;
-}
 
 export function makeArrayClass(events) {
     return class MyArray {
@@ -11,11 +9,7 @@ export function makeArrayClass(events) {
 
         constructor(p1, p2, p3) { // ...params doesn't work here for some reason
             const params = [p1, p2, p3];
-            const {
-                size,
-                options,
-                items
-            } = this.readParams(params);
+            const { size, options, items } = readParams(params, { size: 0, options: {}, items: [] });
             this.items = items ?? [];
 
             this.id = makeId();
@@ -30,56 +24,33 @@ export function makeArrayClass(events) {
                 name: options?.name
             });
 
-            let self = this;
-
             return new Proxy(this, {
                 get(target, prop) {
-                    if ( Number(prop) === prop && !(prop in target) ) {
-                        return self.items[prop]
+                    if ( prop === 'items' ) {
+                        return undefined;
                     }
-                    return target[prop];
+                    if ( isNumber(prop) ) {
+                        return target.items[prop]
+                    }
+                    return target.items[prop];
                 },
                 set(target, prop, val) {
-                    if ( Number(prop) === prop ) {
-                        self.items[prop] = val;
+                    if ( isNumber(prop) || isNumericString(prop) ) {
+                        target.items[prop] = val;
                         events.push({
                             event: 'setitem',
-                            componentId: self.id,
+                            componentId: target.id,
                             index: Number(prop),
                             value: val,
                             id: Number(prop)
                         });
+                        return true;
                     }
-                    target[prop] = val;
-                    return true;
+
+                    return false;
                 }
             });
         }
-
-        readParams(params) {
-            console.log("hello:", params);
-            const parsed = {
-                size: 0,
-                items: [],
-                options: {}
-            };
-            console.log("hello:", params);
-            while ( params.length > 0 ) {
-                const param = params.shift();
-                console.log("param:", param);
-                if ( typeof param === 'number' ) {
-                    parsed.size = param;
-                } else if ( isArray(param) ) {
-                    parsed.items = param;
-                } else if ( typeof param === 'object' ) {
-                    parsed.options = param;
-                }
-            }
-
-            console.log("Parsed:", parsed);
-            return parsed;
-        }
-
     };
 }
 
