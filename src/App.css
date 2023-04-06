@@ -6,6 +6,7 @@ body {
     max-height: 100vh;
     min-height: 100vh;
     overflow: hidden;
+    background-color: ghostwhite;
 }
 
 .App {
@@ -22,6 +23,7 @@ body {
     padding: 0.5em;
     display: grid;
     grid-template-rows: min-content;
+    background-color: white;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -65,6 +67,7 @@ textarea {
     overflow-y: auto;
     border: solid gray 1px;
     padding-left: 0.5em;
+    background-color: white;
 }
 
 .help-content {
@@ -77,6 +80,7 @@ textarea {
     gap: 1em;
     padding: 0.5em;
     min-height: calc(100% - 0.5em);
+    background-color: white;
 }
 
 .blocks > * {
@@ -115,7 +119,7 @@ textarea {
     display: flex;
     flex-direction: column;
     padding: 0.2em;
-    background-color: #B99B6B;
+    background-color: #698269;
 }
 
 .stack > div {
@@ -148,8 +152,8 @@ textarea {
     min-width: 10em;
     display: flex;
     flex-direction: column;
+    background-color: #B99B6B;
     padding: 0.2em;
-    background-color: #F1DBBF;
 }
 
 .heap > div {
@@ -166,7 +170,7 @@ textarea {
     display: flex;
     flex-direction: row;
     padding: 0.5em;
-    background-color: #698269;
+    background-color: #F1DBBF;
     gap: 0.5em;
 }
 
@@ -176,7 +180,17 @@ textarea {
 }
 
 
-.array, .object {
+.object {
+    border: solid gray 1px;
+    min-width: 10em;
+    background-color: #826969;
+}
+
+.array h2, .heap h2, .object h2, .queue h2, .stack h2 {
+    color: #eee;
+}
+
+.array {
     border: solid gray 1px;
     min-width: 10em;
     background-color: #696982;
