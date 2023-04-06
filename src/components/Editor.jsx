@@ -6,11 +6,11 @@ vars.sum = 0; \n\
 const q = new Queue({ name: 'q' }); \n\
 const vec = new Vector([8, 3, 9, 2, 3, 4, 5, 20], { name: 'vec' }); \n\
 const st = new Stack({ name: 'st' }); \n\
-const map = new Map({ name: 'map' }); \n\
+const dic = new Dict({ name: 'dic' }); \n\
 const hp = new Heap({ name: 'hp' }); \n\
 \n\
-map['x'] = 9; \n\
-map['y'] = 'banana'; \n\
+dic['x'] = 9; \n\
+dic['y'] = 'banana'; \n\
 \n\
 q.enqueue(3); \n\
 q.enqueue(6); \n\

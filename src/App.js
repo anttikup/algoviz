@@ -6,7 +6,7 @@ import Editor from './components/Editor';
 import VectorComponent, { makeVectorClass } from './components/Vector';
 import GlobalsComponent, { makeGlobalsClass } from './components/Globals';
 import HeapComponent, { makeHeapClass } from './components/Heap';
-import MapComponent, { makeMapClass } from './components/Map';
+import DictComponent, { makeDictClass } from './components/Dict';
 import QueueComponent, { makeQueueClass } from './components/Queue';
 import StackComponent, { makeStackClass } from './components/Stack';
 
@@ -24,7 +24,7 @@ function Component({ data }) {
         case 'array':
             return (<VectorComponent name={data.name} items={data.items} color={data.color} />);
         case 'object':
-            return (<MapComponent name={data.name} items={data.items} color={data.color} />);
+            return (<DictComponent name={data.name} items={data.items} color={data.color} />);
         case 'globals':
             return (<GlobalsComponent name={data.name} items={data.items} color={data.color} />);
         default:
@@ -201,7 +201,7 @@ function App() {
             const Queue = makeQueueClass(curEvents);
             const Heap = makeHeapClass(curEvents);
             const Vector = makeVectorClass(curEvents);
-            const Map = makeMapClass(curEvents);
+            const Dict = makeDictClass(curEvents);
             const Globals = makeGlobalsClass(curEvents);
             const vars = new Globals({ name: 'vars' });
 
@@ -332,23 +332,23 @@ function App() {
                             Number of items
                         </p>
 
-                        <h5>Map</h5>
+                        <h5>Dict</h5>
                         <code>
-                            const map = new Map();<br/>
-                            map['x'] = 3; // or: map.x = 3;<br/>
-                            stack.push(map['x'] + map['y']);<br/>
+                            const dict = new Dict();<br/>
+                            dict['x'] = 3; // or: dict.x = 3;<br/>
+                            stack.push(dict['x'] + dict['y']);<br/>
                         </code>
                         <h6>Constructor</h6>
                         <p>
                             Parameters: options (object)
                         </p>
-                        <h6>map.x = value</h6>
+                        <h6>dict['x'] = value</h6>
                         <p>
-                            Set a member.
+                            Set value of key.
                         </p>
-                        <h6>value = map.x</h6>
+                        <h6>value = dict['x']</h6>
                         <p>
-                            Get value of member.
+                            Get value of key.
                         </p>
 
                         <h5>Queue</h5>
