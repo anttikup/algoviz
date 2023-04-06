@@ -258,6 +258,29 @@ function App() {
                         <p>
                             Use the following components in your code to display them.
                         </p>
+
+                        <h4>Options</h4>
+                        <p>
+                            All the components can take an options object as a constructor parameter.
+                        </p>
+                        <pre>
+                            const options = {'{'}<br/>
+                            &nbsp;&nbsp;name: 'array1',<br/>
+                            &nbsp;&nbsp;color: 'chartreuse'<br/>
+                            {'}'};<br/>
+                            <br/>
+                            new Array(options);<br/>
+                        </pre>
+
+                        <h5>name</h5>
+                        <p>
+                            Text that is displayed in the header of the component.
+                        </p>
+                        <h5>color</h5>
+                        <p>
+                            Background color of component.
+                        </p>
+
                         <h4>Components</h4>
 
                         <h5>Array</h5>
@@ -271,13 +294,13 @@ function App() {
                         <p>
                             Parameters: options (object), initial items (array), size (integer). The parameters can be in any order.
                         </p>
-                        <h6>Push</h6>
+                        <h6>arr[index] = value</h6>
                         <p>
-                            Add a value.
+                            Set value at index.
                         </p>
-                        <h6>Pop</h6>
+                        <h6>value = arr[index]</h6>
                         <p>
-                            Get a value.
+                            Get value at index.
                         </p>
                         <h6>Length</h6>
                         <p>
@@ -293,7 +316,7 @@ function App() {
                         </code>
                         <h6>Constructor</h6>
                         <p>
-                            Parameters: options (object), initial items (array), comparator (function <code>(a, b) => ()</code>).
+                            Parameters: options (object), initial items (array), comparator (function, <code>(a, b) => ()</code>).
                                                                                                         Parameters can be in any order.
                         </p>
                         <h6>Insert</h6>
@@ -307,6 +330,25 @@ function App() {
                         <h6>Length</h6>
                         <p>
                             Number of items
+                        </p>
+
+                        <h5>Object</h5>
+                        <code>
+                            const obj = new Object();<br/>
+                            obj.x = 3;<br/>
+                            stack.push(obj.x + obj.y);<br/>
+                        </code>
+                        <h6>Constructor</h6>
+                        <p>
+                            Parameters: options (object)
+                        </p>
+                        <h6>obj.x = value</h6>
+                        <p>
+                            Set a member.
+                        </p>
+                        <h6>value = obj.x</h6>
+                        <p>
+                            Get value of member.
                         </p>
 
                         <h5>Queue</h5>
@@ -359,7 +401,7 @@ function App() {
 
                         <h5>vars</h5>
                         <p>
-                            Variables set into the <tt>vars</tt> object are displayed at the top.
+                            Members of the <tt>vars</tt> object are displayed in the top bar.
                         </p>
                         <code>
                             vars.x = 3;<br/>
