@@ -1,7 +1,7 @@
 import { makeId } from '../id';
 
-export function makeObjectClass(events) {
-    return class MyObject {
+export function makeMapClass(events) {
+    return class MyMap {
         id;
         items;
 
@@ -63,7 +63,7 @@ export function makeObjectClass(events) {
     };
 }
 
-export default function ObjectComponent({ name, items, color }) {
+export default function MapComponent({ name, items, color }) {
     const sortedItems = [];
     const keys = Object.keys(items);
     keys.sort();

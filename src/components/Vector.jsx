@@ -2,8 +2,8 @@ import { makeId } from '../id';
 import { isNumericString, isNumber, readParams } from './util';
 
 
-export function makeArrayClass(events) {
-    return class MyArray {
+export function makeVectorClass(events) {
+    return class MyVector {
         id;
         items;
 
@@ -55,7 +55,7 @@ export function makeArrayClass(events) {
     };
 }
 
-export default function Array({ name, items, color }) {
+export default function Vector({ name, items, color }) {
     const filledItems = [];
     items = items ?? [];
     for ( let i = 0; i < items.length; i++ ) {

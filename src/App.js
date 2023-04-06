@@ -3,10 +3,10 @@ import { useEffect, useState, useRef, useReducer } from 'react';
 import Controls from './components/Controls';
 import Editor from './components/Editor';
 
-import ArrayComponent, { makeArrayClass } from './components/Array';
+import VectorComponent, { makeVectorClass } from './components/Vector';
 import GlobalsComponent, { makeGlobalsClass } from './components/Globals';
 import HeapComponent, { makeHeapClass } from './components/Heap';
-import ObjectComponent, { makeObjectClass } from './components/Object';
+import MapComponent, { makeMapClass } from './components/Map';
 import QueueComponent, { makeQueueClass } from './components/Queue';
 import StackComponent, { makeStackClass } from './components/Stack';
 
@@ -22,9 +22,9 @@ function Component({ data }) {
         case 'heap':
             return (<HeapComponent name={data.name} items={data.items} color={data.color} />);
         case 'array':
-            return (<ArrayComponent name={data.name} items={data.items} color={data.color} />);
+            return (<VectorComponent name={data.name} items={data.items} color={data.color} />);
         case 'object':
-            return (<ObjectComponent name={data.name} items={data.items} color={data.color} />);
+            return (<MapComponent name={data.name} items={data.items} color={data.color} />);
         case 'globals':
             return (<GlobalsComponent name={data.name} items={data.items} color={data.color} />);
         default:
@@ -200,8 +200,8 @@ function App() {
             const Stack = makeStackClass(curEvents);
             const Queue = makeQueueClass(curEvents);
             const Heap = makeHeapClass(curEvents);
-            const Array = makeArrayClass(curEvents);
-            const Object = makeObjectClass(curEvents);
+            const Vector = makeVectorClass(curEvents);
+            const Map = makeMapClass(curEvents);
             const Globals = makeGlobalsClass(curEvents);
             const vars = new Globals({ name: 'vars' });
 
@@ -269,7 +269,7 @@ function App() {
                             &nbsp;&nbsp;color: 'chartreuse'<br/>
                             {'}'};<br/>
                             <br/>
-                            new Array(options);<br/>
+                            new Vector(options);<br/>
                         </pre>
 
                         <h5>name</h5>
@@ -283,22 +283,22 @@ function App() {
 
                         <h4>Components</h4>
 
-                        <h5>Array</h5>
+                        <h5>Vector</h5>
                         <code>
-                            const arr = new Array();<br/>
-                            arr[5] = 3;<br/>
-                            stack.push(arr[1] + arr[5]);<br/>
-                            arr.length;<br/>
+                            const vec = new Vector();<br/>
+                            vec[5] = 3;<br/>
+                            stack.push(vec[1] + vec[5]);<br/>
+                            vec.length;<br/>
                         </code>
                         <h6>Constructor</h6>
                         <p>
                             Parameters: options (object), initial items (array), size (integer). The parameters can be in any order.
                         </p>
-                        <h6>arr[index] = value</h6>
+                        <h6>vec[index] = value</h6>
                         <p>
                             Set value at index.
                         </p>
-                        <h6>value = arr[index]</h6>
+                        <h6>value = vec[index]</h6>
                         <p>
                             Get value at index.
                         </p>
@@ -332,21 +332,21 @@ function App() {
                             Number of items
                         </p>
 
-                        <h5>Object</h5>
+                        <h5>Map</h5>
                         <code>
-                            const obj = new Object();<br/>
-                            obj.x = 3;<br/>
-                            stack.push(obj.x + obj.y);<br/>
+                            const map = new Map();<br/>
+                            map['x'] = 3; // or: map.x = 3;<br/>
+                            stack.push(map['x'] + map['y']);<br/>
                         </code>
                         <h6>Constructor</h6>
                         <p>
                             Parameters: options (object)
                         </p>
-                        <h6>obj.x = value</h6>
+                        <h6>map.x = value</h6>
                         <p>
                             Set a member.
                         </p>
-                        <h6>value = obj.x</h6>
+                        <h6>value = map.x</h6>
                         <p>
                             Get value of member.
                         </p>
