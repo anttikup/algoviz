@@ -1,41 +1,66 @@
 import { makeId } from '../id';
 import { readParams } from './util';
 
+function minSort(a, b) {
+    return a - b;
+}
 
-export function makeQueueClass(events) {
-    return class Queue {
+function maxSort(a, b) {
+    return b - a;
+}
+
+export function makeHeapClass(events) {
+    return class Heap {
         id;
         items;
         constructor(p1, p2, p3) {
             const params = [p1, p2, p3];
-            const { options, items } = readParams(params, { options: {}, items: [] });
+            const { options, items, func: comparator, string: compStr } =
+                readParams(params, { options: {}, items: [], func: null, string: "min" });
 
             this.id = makeId();
-            console.info("Created queue,", this.id);
+
+            if ( compStr && comparator ) {
+                throw new Error("Can't give both comparator function or 'min'/'max'");
+            }
+
+            if ( compStr === "min" ) {
+                this.comparator = minSort;
+            } else if ( compStr === "max" ) {
+                this.comparator = maxSort;
+            } else {
+                this.comparator = comparator;
+            }
+
+            items.sort(this.comparator);
+            this.items = items;
+
+            console.info("Created heap,", this.id);
             events.push({
                 event: 'create',
-                type: 'queue',
+                type: 'heap',
                 componentId: this.id,
                 items: [ ...items ],
                 color: options?.color,
                 name: options?.name
             });
-            this.items = [ ...items ];
         }
 
-        enqueue(val) {
+        insert(val) {
             this.items.push(val);
+            this.items.sort(this.comparator);
             events.push({
-                event: 'enqueue',
+                event: 'insert',
                 componentId: this.id,
                 value: val,
+                comparator: this.comparator
             });
         }
 
-        dequeue() {
+        extract() {
             const val = this.items.shift();
             events.push({
-                event: 'dequeue',
+                event: 'extract',
                 componentId: this.id,
                 value: val,
             });
@@ -57,14 +82,14 @@ export function makeQueueClass(events) {
     };
 }
 
-export default function Queue({ name, items, limbo, color }) {
+export default function Heap({ name, items, color }) {
     return (
-        <div className="queue" style={{ backgroundColor: color }}>
+        <div className="heap" style={{backgroundColor: color }}>
             <h2>{ name }</h2>
             <div>
                 {
                     items.map((item, index) => (
-                        <div key={`${index}-${item}`} className="item queue-item">
+                        <div key={`${index}-${item}`} className="item heap-item">
                             {item}
                         </div>
                     ))

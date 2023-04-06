@@ -14,6 +14,15 @@ function isObject(obj) {
     return typeof obj === "object";
 }
 
+function isFunction(obj) {
+    return typeof obj === "function";
+}
+
+function isString(obj) {
+    return typeof obj === "string";
+}
+
+
 export function readParams(params, defaults) {
     const parsed = defaults;
 
@@ -25,6 +34,10 @@ export function readParams(params, defaults) {
             parsed.items = param;
         } else if ( isObject(param) ) {
             parsed.options = param;
+        } else if ( isFunction(param) ) {
+            parsed.func = param;
+        } else if ( isString(param) ) {
+            parsed.string = param;
         }
     }
 

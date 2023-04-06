@@ -1,20 +1,25 @@
 import { makeId } from '../id';
+import { readParams } from './util';
 
 export function makeStackClass(events) {
     return class Stack {
         id;
         items;
-        constructor(options) {
+        constructor(p1, p2, p3) {
+            const params = [p1, p2, p3];
+            const { options, items } = readParams(params, { options: {}, items: [] });
+
             this.id = makeId();
-            this.items = [];
             console.info("Created stack,", this.id);
             events.push({
                 event: 'create',
                 type: 'stack',
                 componentId: this.id,
+                items: [ ...items ],
                 color: options?.color,
                 name: options?.name
             });
+            this.items = [ ...items ];
         }
 
         push(val) {
