@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/algoviz/static/css/main.fb2da9a5.css",
-    "main.js": "/algoviz/static/js/main.4bf4d988.js",
+    "main.js": "/algoviz/static/js/main.832cb92e.js",
     "index.html": "/algoviz/index.html",
     "main.fb2da9a5.css.map": "/algoviz/static/css/main.fb2da9a5.css.map",
-    "main.4bf4d988.js.map": "/algoviz/static/js/main.4bf4d988.js.map"
+    "main.832cb92e.js.map": "/algoviz/static/js/main.832cb92e.js.map"
   },
   "entrypoints": [
     "static/css/main.fb2da9a5.css",
-    "static/js/main.4bf4d988.js"
+    "static/js/main.832cb92e.js"
   ]
 }
